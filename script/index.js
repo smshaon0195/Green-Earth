@@ -10,38 +10,42 @@ let allCategories = () => {
     });
 };
 
-
-
 // toggole funcaiton
+let ulParent = document.getElementById("item-catagories-parent");
 
-let activeBtn = (categoryName) => {
-  let allLi = document.querySelectorAll("#item-catagories-parent li");
+let activeBtn = (clickedId) => {
+  let allLi = ulParent.querySelectorAll("li");
   allLi.forEach((li) => li.classList.remove("buttonActive"));
 
-  let element = document.getElementById(categoryName);
+  let element = document.getElementById(clickedId);
   element.classList.add("buttonActive");
 };
 
-let ulParent = document.getElementById("item-catagories-parent");
-
-let displayCatagories = (name) => {
-  // all trees
+let displayCatagories = (categories) => {
+  // All Trees
   let litrees = document.createElement("li");
-  litrees.innerHTML = `
-              <li class="hover:bg-[#15803D] hover:text-white cursor-pointer p-1 rounded-sm"  onclick="allPlants()"   >
-                  All Trees
-                </li>`;
+  litrees.id = "alltressId";
+  litrees.className =
+    "hover:bg-[#15803D] hover:text-white cursor-pointer p-1 rounded-sm";
+  litrees.textContent = "All Trees";
+
+  litrees.addEventListener("click", () => {
+    allPlants();
+    activeBtn("alltressId");
+  });
 
   ulParent.appendChild(litrees);
 
-  name.forEach((id) => {
-    console.log(id);
+  categories.forEach((id) => {
     let li = document.createElement("li");
-    li.innerHTML = `
-    
-    <li onclick="activeBtn(id); allPlants(${id.id})" id="catagory-${id.id}"  class="my-2 hover:bg-[#15803D] hover:text-white cursor-pointer p-1 rounded-sm">${id.category_name}</li>
-        
-    `;
+    li.id = `catagory-${id.id}`;
+    li.className =  "my-2 hover:bg-[#15803D] hover:text-white cursor-pointer p-1 rounded-sm";
+    li.textContent = id.category_name;
+    li.addEventListener("click", () => {
+      allPlants(id.id);
+      activeBtn(`catagory-${id.id}`);
+    });
+
     ulParent.appendChild(li);
   });
 };
@@ -59,7 +63,6 @@ let manageSpiner = (loding) => {
 };
 // Card Display-----------------
 let allPlants = (id) => {
-  console.log(id);
   manageSpiner(true);
   const url = id
     ? `https://openapi.programming-hero.com/api/category/${id}`
@@ -67,14 +70,12 @@ let allPlants = (id) => {
   fetch(url)
     .then((plats) => plats.json())
     .then((plantCard) => {
-      console.log(plantCard);
       manageSpiner(false);
       displayPlants(plantCard.plants);
     });
 };
 
 let displayPlants = (cards) => {
-  console.log(cards);
   const cardParent = document.getElementById("card-container");
   cardParent.innerHTML = "";
   cards.forEach((card) => {
@@ -88,7 +89,7 @@ let displayPlants = (cards) => {
                     alt="" />
                 </div>
                 <div class="card-titile my-3">
-                  <h4 class="font-bold mb-1">${card.name}</h4>
+                  <h4 onclick="allDiscription()" class="font-bold mb-1">${card.name}</h4>
                   <p class="w-full h-13 line-clamp-2">${card.description}</p>
                 </div>
                 <div class="flex justify-between">
@@ -163,3 +164,7 @@ let addHistory = (item) => {
 };
 
 allPlants();
+
+let allDiscription = () => {
+  alert("hello");
+};
