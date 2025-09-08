@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@plugin "daisyui";
+
+.btn-class{
+    background-color: #FACC15;
+    color: #15803D;
+}
+.buttonActive{
+    background-color: #15803D;
+    color: white;
+}
