@@ -1,3 +1,5 @@
+let card = [];
+
 // Catagori Display---------------------
 let allCategories = () => {
   const url = "https://openapi.programming-hero.com/api/categories";
@@ -8,32 +10,38 @@ let allCategories = () => {
     });
 };
 
-// {
-//     "id": 1,
-//     "category_name": "Fruit Tree",
-//     "small_description": "Trees that bear edible fruits like mango, guava, and jackfruit."
-// }
 
-let activeBtn = (id) => {
+
+// toggole funcaiton
+
+let activeBtn = (categoryName) => {
   let allLi = document.querySelectorAll("#item-catagories-parent li");
   allLi.forEach((li) => li.classList.remove("buttonActive"));
 
-  let element = document.getElementById(id);
+  let element = document.getElementById(categoryName);
   element.classList.add("buttonActive");
-
 };
 
+let ulParent = document.getElementById("item-catagories-parent");
 
 let displayCatagories = (name) => {
-name.forEach((id) => {
-    let ulParent = document.getElementById("item-catagories-parent");
+  // all trees
+  let litrees = document.createElement("li");
+  litrees.innerHTML = `
+              <li class="hover:bg-[#15803D] hover:text-white cursor-pointer p-1 rounded-sm"  onclick="allPlants()"   >
+                  All Trees
+                </li>`;
+
+  ulParent.appendChild(litrees);
+
+  name.forEach((id) => {
+    console.log(id);
     let li = document.createElement("li");
     li.innerHTML = `
     
-    <li onclick="activeBtn(id)" id="catagory-${id.id}"  class="my-2 hover:bg-[#15803D] hover:text-white cursor-pointer p-1 rounded-sm">${id.category_name}</li>
+    <li onclick="activeBtn(id); allPlants(${id.id})" id="catagory-${id.id}"  class="my-2 hover:bg-[#15803D] hover:text-white cursor-pointer p-1 rounded-sm">${id.category_name}</li>
         
     `;
-
     ulParent.appendChild(li);
   });
 };
@@ -50,19 +58,25 @@ let manageSpiner = (loding) => {
   }
 };
 // Card Display-----------------
-let allPlants = () => {
+let allPlants = (id) => {
+  console.log(id);
   manageSpiner(true);
-  const url = "https://openapi.programming-hero.com/api/plants";
+  const url = id
+    ? `https://openapi.programming-hero.com/api/category/${id}`
+    : `https://openapi.programming-hero.com/api/plants`;
   fetch(url)
     .then((plats) => plats.json())
     .then((plantCard) => {
+      console.log(plantCard);
+      manageSpiner(false);
       displayPlants(plantCard.plants);
     });
 };
 
 let displayPlants = (cards) => {
+  console.log(cards);
   const cardParent = document.getElementById("card-container");
-
+  cardParent.innerHTML = "";
   cards.forEach((card) => {
     let newCard = document.createElement("div");
     newCard.innerHTML = `
@@ -97,7 +111,6 @@ let displayPlants = (cards) => {
     cardParent.appendChild(newCard);
     manageSpiner(false);
     let addBtn = newCard.querySelector(".add-to-cart");
-    // console.log(addBtn)
 
     addBtn.addEventListener("click", function () {
       addHistory(card);
@@ -106,21 +119,20 @@ let displayPlants = (cards) => {
 };
 
 let taka = 0;
-let pPrice = document.getElementById("taka").innerText
-let price = Number(pPrice)
+let pPrice = document.getElementById("taka").innerText;
+let price = Number(pPrice);
 // Add money funcation
-let totalAmmount = (ammount)=>{
-taka += ammount;   
- document.getElementById("taka").innerText = taka;
-
-}
-
+let totalAmmount = (ammount) => {
+  taka += ammount;
+  document.getElementById("taka").innerText = taka;
+};
 
 let addHistory = (item) => {
-  totalAmmount(item.price)
+  totalAmmount(item.price);
 
-  alert(`${item.name} is succesfully copy`);
+  alert(`${item.name} successfully added to cart`);
   const historyParent = document.getElementById("cart-parents");
+
   let historyItem = document.createElement("div");
   historyItem.innerHTML = `
  <div id="cart-parent" class="mb-3 ">
@@ -134,44 +146,20 @@ let addHistory = (item) => {
                 </div>
   `;
   historyParent.appendChild(historyItem);
+  // remove funcation
+  let cancels = document.querySelectorAll(".cencel");
 
-let cancels = document.querySelectorAll(".cencel");
-
-cancels.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    if (taka <= 0) return;
-
-    let parent = e.target.closest("#cart-parent");
-
-    let price = Number(parent.querySelector(".price").innerText);
-
-    taka -= price;
-
-    if (taka < 0) taka = 0;
-
-    document.getElementById("taka").innerText = taka;
-
-    parent.remove();
+  cancels.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      if (taka <= 0) return;
+      let parent = e.target.closest("#cart-parent");
+      let price = Number(parent.querySelector(".price").innerText);
+      taka -= price;
+      if (taka < 0) taka = 0;
+      document.getElementById("taka").innerText = taka;
+      parent.remove();
+    });
   });
-});
-
-
-
-
-
-  
 };
 
 allPlants();
-
-
-
-
-
-
-// let totalPrice = document.createElement("div");
-//   totalPrice.innerHTML = `
-
-// 
-
-//     `;
