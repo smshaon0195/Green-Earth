@@ -26,7 +26,7 @@ let displayCatagories = (categories) => {
   let litrees = document.createElement("li");
   litrees.id = "alltressId";
   litrees.className =
-    "hover:bg-[#15803D] hover:text-white cursor-pointer p-1 rounded-sm";
+    "hover:bg-[#15803D] hover:text-white cursor-pointer p-1 rounded-sm ";
   litrees.textContent = "All Trees";
 
   litrees.addEventListener("click", () => {

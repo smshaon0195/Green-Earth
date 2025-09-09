@@ -93,58 +93,132 @@
         </div>
       </div>
     </section>
-    <main>
-      <div class="bg-[#F0FDF4]">
-        <div class="container mx-auto pt-10">
-          <div class="text-center mb-5 text-3xl font-semibold">
-            <h1>Choose Your Trees</h1>
-          </div>
-         
-          <section class="flex gap-8">
-            <div class="catagories h-auto flex-1/6">
-              <h4 class="font-bold mb-2 p-1">Categories</h4>
-              <ul id="item-catagories-parent" class="">
-                
-              </ul>
+    <section class="bg-[#F0FDF4] pb-14">
+      <main class=" ">
+        <div class="">
+          <div class="container mx-auto pt-10">
+            <div class="text-center mb-5 text-3xl font-semibold">
+              <h1>Choose Your Trees</h1>
             </div>
-            <!-- card container -->
+
+            <section class="flex gap-8">
+              <div class="catagories h-auto flex-1/6">
+                <h4 class="font-bold mb-2 p-1">Categories</h4>
+                <ul id="item-catagories-parent" class=""></ul>
+              </div>
+              <!-- card container -->
               <section
-            id="spiner"   class="items-center justify-center my-5 hidden"
-          >
-            <span class="loading loading-spinner text-secondary"></span>
-          </section>
-            <div
-              id="card-container"
-              class="card-section h-15 flex-4/6 grid grid-cols-3 gap-5"
-            >
-            
-              <!-- card div -->
-            </div>
-            <!-- right balance items -->
-            <div id="item-balacnce-cart" class="p-3 bg-white flex-1/6">
-              <div>
-                <h4 class="font-bold">Your Cart</h4>
-                <div>
-                  <div id="cart-parents">
-                    
+                id="spiner"
+                class="items-center justify-center my-5 hidden"
+              >
+                <span class="loading loading-spinner text-secondary"></span>
+              </section>
+              <div class="card-section flex-4/6">
+                <!-- card div -->
+
+                <div id="card-container" class="grid grid-cols-3 gap-5"></div>
+                <section>
+                  <div class="about-section text-center">
+                    <h1 class="text-2xl font-semibold my-8">
+                      About the Campaign
+                    </h1>
+                    <div class="flex items-center gap-4">
+                      <div class="left-image-div flex-1/2">
+                        <img src="./assets/about.png" alt="" srcset="" />
+                      </div>
+                      <div
+                        class="text-[#1F2937] right-about-text flex-1/2 text-left"
+                      >
+                        <p>
+                          Green Earth is a global tree plantation initiative
+                          dedicated to fighting climate change. Since our start,
+                          we’ve planted over 500,000 trees worldwide. By joining
+                          our campaign, you help restore forests, create
+                          habitats for wildlife, and combat global warming.
+                        </p>
+                        <ul class="mt-9 list-disc ml-5">
+                          <li>Restoration of natural habitats</li>
+                          <li>Improvement of air quality</li>
+                          <li>Support for local communities</li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
-                  <div id="final-Balance">
-                    <div
-                      class="flex font-semibold justify-between mt-2 border-t-1 border-gray-400"
-                    >
-                      <div class="">Total:</div>
-                      <div>
-                        <p id="taka">0</p>
+                </section>
+              </div>
+              <!-- right balance items -->
+              <div id="item-balacnce-cart" class="p-3 bg-white flex-1/6">
+                <div>
+                  <h4 class="font-bold">Your Cart</h4>
+                  <div>
+                    <div id="cart-parents"></div>
+                    <div id="final-Balance">
+                      <div
+                        class="flex font-semibold justify-between mt-2 border-t-1 border-gray-400"
+                      >
+                        <div class="">Total:</div>
+                        <div>
+                          <p id="taka">0</p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
+        </div>
+      </main>
+    </section>
+    <!-- Our Impact -->
+    <section class="bg-[#CFF0DC] py-12">
+      <div class="OurImpact-section container mx-auto text-center">
+        <h3 class="my-5 text-2xl font-semibold">Our Impact</h3>
+        <div class="card-parent gap-4 mb-3 grid grid-cols-3">
+          <div class="card bg-white rounded-sm p-6 felx-1">
+            <h2 class="text-[#15803D] text-2xl font-bold">5000K+</h2>
+            <p class="text-[#1F2937]">Trees Planted</p>
+          </div>
+          <div class="card bg-white rounded-sm p-6 felx-1">
+            <h2 class="text-[#15803D] text-2xl font-bold">120+</h2>
+            <p class="text-[#1F2937]">Communities Involved</p>
+          </div>
+          <div class="card bg-white rounded-sm p-6 felx-1">
+            <h2 class="text-[#15803D] text-2xl font-bold">30+</h2>
+            <p class="text-[#1F2937]">Countries Reached</p>
+          </div>
         </div>
       </div>
-    </main>
+    </section>
+    <section class="bg-[#166534] shadow">
+      <div class="OurImpact-section container mx-auto py-10 text-center justify-center grid">
+        <h3 class="my-5 text-2xl font-semibold text-white">
+          Plant a Tree Today
+        </h3>
+        <div class="card w-99 bg-[#15803D] rounded-lg   p-5 gap-3">
+          <input
+            class="p-2 bg-white rounded-sm border-0"
+            placeholder="Your Name"
+            type="text"
+          />
+          <input
+            class="p-2 bg-white rounded-sm border-0"
+            placeholder="Your Name"
+            type="text"
+          />
+          <select class="select select-primary w-full border-0">
+            <option disabled selected>Number of Trees</option>
+            <option>VScode</option>
+            <option>VScode fork</option>
+            <option>Another VScode fork</option>
+          </select>
+          <button class="text-[#15803D] bg-[#FACC15] p-2 rounded-3xl font-semibold">Donate Now</button>
+        </div>
+      </div>
+    </section>
+    <footer class="bg-[#14532D] p-5 text-white text-center  ">
+      <p>© 2025 Green Earth. All Rights Reserved.</p>
+    </footer>
     <script src="./script/index.js"></script>
   </body>
 </html>
