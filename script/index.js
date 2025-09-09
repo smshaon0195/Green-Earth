@@ -39,7 +39,8 @@ let displayCatagories = (categories) => {
   categories.forEach((id) => {
     let li = document.createElement("li");
     li.id = `catagory-${id.id}`;
-    li.className =  "my-2 hover:bg-[#15803D] hover:text-white cursor-pointer p-1 rounded-sm";
+    li.className =
+      "my-2 hover:bg-[#15803D] hover:text-white cursor-pointer p-1 rounded-sm";
     li.textContent = id.category_name;
     li.addEventListener("click", () => {
       allPlants(id.id);
@@ -89,7 +90,7 @@ let displayPlants = (cards) => {
                     alt="" />
                 </div>
                 <div class="card-titile my-3">
-                  <h4 onclick="allDiscription()" class="font-bold mb-1">${card.name}</h4>
+                  <h4 onclick="modalDialog.showModal(allDiscription(${card.id}))"  class="font-bold mb-1">${card.name}</h4>
                   <p class="w-full h-13 line-clamp-2">${card.description}</p>
                 </div>
                 <div class="flex justify-between">
@@ -164,7 +165,34 @@ let addHistory = (item) => {
 };
 
 allPlants();
+// --------------------------------------------
+let allDiscription = (id) => {
+  console.log(id);
+  let url = `https://openapi.programming-hero.com/api/plant/${id}`;
+  fetch(url)
+    .then((datas) => datas.json())
+    .then((data) => {
+      showModal(data.plants);
+    });
+};
 
-let allDiscription = () => {
-  alert("hello");
+let showModal = (palants) => {
+  let modalParent = document.getElementById("modalDetails");
+  modalParent.innerHTML = `
+
+<div class=" ">
+            
+            
+            <div><h3 class="font-bold my-3">${palants.name}</h3></div>
+            <div><img class="h-60 w-full rounded-xl my-3 " src="${palants.image}" alt=""></div>
+            <div><span class="font-bold my-3">Catagory: </span>${palants.category} </div>
+            <div><span class="font-bold my-3">Price: </span>${palants.price} </div>
+            <div><p class="text-justify my-3"><span class="font-bold ">Description: </span>${palants.description}</p></div>
+            
+            
+            
+          </div>
+`;
+
+  document.getElementById("modalDialog").showModal();
 };
